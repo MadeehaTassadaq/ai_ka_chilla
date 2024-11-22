@@ -51,16 +51,25 @@
                 </p>
 
                 <!-- Display Prediction Result -->
-                {% if prediction %}
-                    <div class="alert alert-success text-center">
-                        <strong>Prediction Result:</strong> {{ prediction }}
-                    </div>
+                {% if prediction == "Low Risk" %}
+                <div class="alert alert-success text-center">
+                    <strong>Prediction Result:</strong> {{ prediction }}
+                </div>
+                {% elif prediction == "Medium Risk" %}
+                <div class="alert alert-primary text-center">
+                    <strong>Prediction Result:</strong> {{ prediction }}
+                </div>    
+                {% elif prediction == "High Risk" %}
+                <div class="alert alert-danger text-center">
+                    <strong>Prediction Result:</strong> {{ prediction }}
+                </div>
                 {% elif error_message %}
-                    <div class="alert alert-danger text-center">
-                        <strong>Error:</strong> {{ error_message }}
-                    </div>
+                <div class="alert alert-danger text-center">
+                    <strong>Error:</strong> {{ error_message }}
+                </div>
                 {% endif %}
-                
+
+
                 <!-- Input Form -->
                 <form action="/" method="POST" id="predictionForm">
                     <div class="mb-3">
@@ -80,7 +89,7 @@
                         <input type="number" step="0.01" class="form-control" id="bsr" name="bsr" required>
                     </div>
                     <div class="mb-3">
-                        <label for="body_temp" class="form-label text-dark">Body Temperature (°f )</label>
+                        <label for="body_temp" class="form-label text-dark">Body Temperature (°F)</label>
                         <input type="number" step="0.1" class="form-control" id="body_temp" name="body_temp" required>
                     </div>
                     <div class="mb-3">
