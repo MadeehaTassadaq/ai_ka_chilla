@@ -1,0 +1,7 @@
+pandas
+numpy==1.26.4
+tensorflow==2.11
+scikit-learn
+matplotlib
+seaborn
+flask

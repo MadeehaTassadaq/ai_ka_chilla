@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternal Health Risk Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .btn-primary {
+            background-color: #2575fc;
+            border-color: #2575fc;
+        }
+        .btn-primary:hover {
+            background-color: #6a11cb;
+            border-color: #6a11cb;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .alert {
+            font-weight: bold;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4" style="max-width: 500px; width: 100%; background-color: #ffffffdd;">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4 text-dark">Maternal Health Risk Prediction</h2>
+                <p class="text-center text-muted mb-4">
+                    Enter the details below to predict maternal health risk level.
+                </p>
+
+                <!-- Display Prediction Result -->
+                {% if prediction %}
+                    <div class="alert alert-success text-center">
+                        <strong>Prediction Result:</strong> {{ prediction }}
+                    </div>
+                {% elif error_message %}
+                    <div class="alert alert-danger text-center">
+                        <strong>Error:</strong> {{ error_message }}
+                    </div>
+                {% endif %}
+                
+                <!-- Input Form -->
+                <form action="/" method="POST" id="predictionForm">
+                    <div class="mb-3">
+                        <label for="age" class="form-label text-dark">Age</label>
+                        <input type="number" class="form-control" id="age" name="age" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="systolic_bp" class="form-label text-dark">Systolic Blood Pressure</label>
+                        <input type="number" class="form-control" id="systolic_bp" name="systolic_bp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="diastolic_bp" class="form-label text-dark">Diastolic Blood Pressure</label>
+                        <input type="number" class="form-control" id="diastolic_bp" name="diastolic_bp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bsr" class="form-label text-dark">Blood Sugar Reading (mmol)</label>
+                        <input type="number" step="0.01" class="form-control" id="bsr" name="bsr" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="body_temp" class="form-label text-dark">Body Temperature (°f )</label>
+                        <input type="number" step="0.1" class="form-control" id="body_temp" name="body_temp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="heart_rate" class="form-label text-dark">Heart Rate</label>
+                        <input type="number" class="form-control" id="heart_rate" name="heart_rate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-3">Predict Risk</button>
+                    <button type="button" class="btn btn-secondary w-100 mt-3" onclick="resetForm()">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Reset form fields
+        function resetForm() {
+            document.getElementById('predictionForm').reset();
+            window.location.href = '/';  // Reload the page after reset to clear any result
+        }
+    </script>
+</body>
+</html>
